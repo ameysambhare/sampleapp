@@ -17,5 +17,11 @@ public class ProcessServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("inside process servlet do Post "+request.getParameter("username"));
+        if("admin".equalsIgnoreCase(request.getParameter("username")) && "admin".equalsIgnoreCase(request.getParameter("password"))){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
+            dispatcher.forward(request,response);
+        }else{
+            response.sendRedirect("error.html");
+        }
     }
 }
