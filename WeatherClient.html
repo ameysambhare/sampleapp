@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function getTemp() {
+        var key= <>;
+        var city = document.getElementById('city').value;
+
+        fetch('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid='+key).then((response) => response.json()).then((jsonData) => {
+
+  document.getElementById('temp').innerHTML=convertToFarenheit(jsonData.main.temp);
+
+   document.getElementById('temp_lbl').style.display='block';
+   document.getElementById('mintemp_lbl').style.display='block';
+   document.getElementById('maxtemp_lbl').style.display='block';
+   document.getElementById('pressure_lbl').style.display='block';
+  document.getElementById('mintemp').innerHTML=convertToFarenheit(jsonData.main.temp_min);
+  document.getElementById('maxtemp').innerHTML=convertToFarenheit(jsonData.main.temp_max);
+  document.getElementById('pressure').innerHTML=convertToFarenheit(jsonData.main.pressure);
+});
+        }
+
+        function convertToFarenheit(K){
+            return  (((K-273.15)*1.8)+32).toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <input type="text" id="city" />
+    <input type ="button" value="Get" onclick="getTemp();"/>
+    <div>
+        <label for="temp" id="temp_lbl" hidden>Average Temperature is</label>
+        <span id="temp"></span>
+        <br/>
+        <label for="mintemp" id="mintemp_lbl" hidden>Minimum Temperature is</label>
+        <span id="mintemp"></span>
+        <br/>
+        <label for="maxtemp" id="maxtemp_lbl"  hidden>Maximum Temperature is</label>
+        <span id="maxtemp"></span>
+        <br/>
+        <label for="pressure" id ="pressure_lbl" hidden>Pressure is</label>
+        <span id="pressure"></span>
+    </div>
+</body>
+</html>
