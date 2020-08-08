@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <script>
+        function getWeather() {
+
+            var city = document.getElementById('city').value;
+            var appid = <api_key>;
+            fetch('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid='+appid).
+            then(response => {
+               return response.json();
+                }).then(jsonData => {
+                    console.log(convertToF(jsonData.main.feels_like));
+                    console.log(jsonData.name);
+                    document.getElementById('feels_like').innerHTML = convertToF(jsonData.main.feels_like);
+                    document.getElementById('cityname').innerHTML = (jsonData.name);
+                   });
+        }
+
+        function convertToF(k) {
+            return (1.8*(k-273) + 32);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" placeholder="Enter city name" id ="city" />
+    <input type="button" value="Click me" onclick="getWeather();"/>
+    <br/>
+    <label for="feels_like">Feels Like temprature</label>
+    <span id="feels_like"></span>
+    <br/>
+    <label for="cityname">Entered City</label>
+    <span id="cityname"></span>
+</body>
+</html>
