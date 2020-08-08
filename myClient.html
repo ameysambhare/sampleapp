@@ -7,7 +7,7 @@
         function getWeather() {
 
             var city = document.getElementById('city').value;
-            var appid = '31b787379973b52a0a8581043061f3ad';
+            var appid = <api_key>;
             fetch('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid='+appid).
             then(response => {
                return response.json();
